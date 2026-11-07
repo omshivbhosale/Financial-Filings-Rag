@@ -1,0 +1,14 @@
+# Secrets
+.env
+
+# Generated data (recreated by the notebooks)
+data/raw/
+data/text/
+chroma_db/
+
+# Python / Jupyter / OS / IDE
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.idea/
+.vscode/

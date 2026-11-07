@@ -1,0 +1,4 @@
+Method,Hit rate@3,Hit rate@5,Hit rate@10,MRR
+vector,0.556,0.556,0.704,0.471
+vector_filter,0.556,0.556,0.704,0.471
+hybrid_rerank,0.741,0.778,0.889,0.685

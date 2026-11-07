@@ -1,0 +1,34 @@
+question,answer,ticker,source_chunk,type,origin
+"What is the amount of California R&D credit carryforwards that Apple had as of September 26, 2026?",$5.4 billion,AAPL,AAPL_186,in_scope,generated
+What is the date on which Apple Inc.'s fiscal year ends for the 2026 annual reporting period?,the last Saturday of September,AAPL,AAPL_161,in_scope,generated
+Which new product did Apple announce in the first quarter of fiscal year 2026?,14-inch MacBook Pro,AAPL,AAPL_132,in_scope,generated
+"According to Amazon's annual report, what does free cash flow not incorporate?",the portion of payments representing principal reductions of debt or cash payments for business acquisitions.,AMZN,AMZN_133,in_scope,generated
+"According to Amazon's 10-K, what is Amazon's ultimate financial focus?","long-term, sustainable growth in free cash flow",AMZN,AMZN_93,in_scope,generated
+"What was the cash consideration for Amazon's acquisition of 1Life Healthcare, Inc. in 2023?",$3.5 billion,AMZN,AMZN_210,in_scope,generated
+"What was the amount of severance costs recorded by Amazon for the year ended December 31, 2025?",$2.7 billion,AMZN,AMZN_161,in_scope,generated
+When was Satya Nadella appointed Chairman of the Board at Microsoft?,June 2021,MSFT,MSFT_48,in_scope,generated
+"What was Microsoft’s revenue from Server products and cloud services in the year ended June 30, 2026?","129,425",MSFT,MSFT_314,in_scope,generated
+What unified set of cloud-based intelligent business applications does Microsoft Dynamics promote?,Dynamics 365,MSFT,MSFT_23,in_scope,generated
+When was NVIDIA's Compensation Recovery Policy amended and restated?,"November 30, 2023",NVDA,NVDA_319,in_scope,generated
+"What was the total carrying amount of goodwill for NVIDIA as of January 25, 2026?",$20.8 billion,NVDA,NVDA_270,in_scope,generated
+On what date did the Supreme Court of the United States grant NVIDIA’s petition for a writ of certiorari?,"June 17, 2024",NVDA,NVDA_289,in_scope,generated
+"What was NVIDIA's federal tax expense for the year ended January 26, 2025?","17,645",NVDA,NVDA_296,in_scope,generated
+When is the trial set for the California Civil Rights Department’s complaint against Tesla?,"July 20, 2026",TSLA,TSLA_371,in_scope,generated
+"According to Tesla's 10-K, what is every Tesla vehicle delivered today designed for?",autonomy,TSLA,TSLA_35,in_scope,generated
+What were Apple's total net sales in fiscal 2026?,"$478,834 million",AAPL,AAPL_139,in_scope,handwritten
+What was Apple's net income in fiscal 2026?,"$132,175 million",AAPL,AAPL_153,in_scope,handwritten
+What was Microsoft's total revenue in fiscal year 2026?,"$331,839 million",MSFT,MSFT_224,in_scope,handwritten
+What was Microsoft's net income in fiscal year 2026?,"$133,749 million",MSFT,MSFT_183,in_scope,handwritten
+What was NVIDIA's total revenue in fiscal year 2026?,"$215,938 million",NVDA,NVDA_176,in_scope,handwritten
+What was NVIDIA's net income in fiscal year 2026?,"$120,067 million",NVDA,NVDA_176,in_scope,handwritten
+What were Tesla's total revenues in 2025?,"$94,827 million",TSLA,TSLA_236,in_scope,handwritten
+What was Tesla's net income attributable to common stockholders in 2025?,"$3,794 million",TSLA,TSLA_237,in_scope,handwritten
+What were Amazon's total net sales in 2025?,"$716,924 million",AMZN,AMZN_153,in_scope,handwritten
+What was Amazon's net income in 2025?,"$77,670 million",AMZN,AMZN_153,in_scope,handwritten
+How many employees did Amazon have at the end of 2025?,"approximately 1,576,000",AMZN,AMZN_13,in_scope,handwritten
+Who is the CEO of Google?,I couldn't find that in the reports.,,,out_of_scope,handwritten
+What was Meta's total revenue in 2025?,I couldn't find that in the reports.,,,out_of_scope,handwritten
+How many stores does Walmart operate?,I couldn't find that in the reports.,,,out_of_scope,handwritten
+What will Apple's revenue be in 2030?,I couldn't find that in the reports.,,,out_of_scope,handwritten
+What is the capital of France?,I couldn't find that in the reports.,,,out_of_scope,handwritten
+How many subscribers does Netflix have?,I couldn't find that in the reports.,,,out_of_scope,handwritten

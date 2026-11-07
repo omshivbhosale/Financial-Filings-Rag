@@ -1,0 +1,3 @@
+method,In-scope accuracy,Wrongly refused (in-scope),Correctly refused (out-of-scope),Overall accuracy
+hybrid_rerank,0.778,0.185,1.0,0.818
+vector,0.556,0.333,1.0,0.636

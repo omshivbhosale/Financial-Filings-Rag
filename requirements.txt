@@ -1,0 +1,14 @@
+requests
+beautifulsoup4
+pandas
+numpy
+python-dotenv
+langchain-core
+langchain-text-splitters
+langchain-huggingface
+langchain-chroma
+langchain-groq
+sentence-transformers
+chromadb
+streamlit
+jupyter
