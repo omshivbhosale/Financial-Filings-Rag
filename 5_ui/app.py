@@ -64,7 +64,7 @@ with st.sidebar:
 
     st.header("⚙️ Settings")
     method = st.selectbox("Search method", METHODS[::-1], format_func=METHOD_LABELS.get)
-    k = st.slider("Chunks sent to the AI", min_value=3, max_value=10, value=10)
+    st.caption("The 10 best-matching report chunks are sent to the AI (the setting with the best evaluation score).")
 
     st.header("💡 Try an example")
     for example in EXAMPLES:
@@ -105,7 +105,7 @@ if question:
     with st.chat_message("assistant"):
         try:
             with st.spinner("Searching the reports…"):
-                result = ask(retriever, llm, question, k=k, method=method)
+                result = ask(retriever, llm, question, method=method)
             st.markdown(result["answer"])
             show_sources(result["sources"])
             st.session_state.messages.append(

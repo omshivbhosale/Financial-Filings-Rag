@@ -62,6 +62,25 @@ def tokenize(text):
     return re.findall(r"[a-z0-9]+", text.lower())
 
 
+# Everyday words -> the wording 10-K reports use. Reports never say "profit", they say "net income",
+# so a casual question like "Apple profit" would otherwise miss the income statement.
+SYNONYMS = {
+    "profit": "net income", "profits": "net income", "earnings": "net income",
+    "sales": "net sales revenue",
+    "staff": "employees", "workers": "employees", "headcount": "employees",
+    "debt": "term debt borrowings",
+}
+
+
+def expand_query(question):
+    """Add report wording for everyday finance words, e.g. "Apple profit" -> "Apple profit (net income)".
+    Skipped when the question already uses the report's wording (e.g. "net sales")."""
+    q = question.lower()
+    extra = [terms for word, terms in SYNONYMS.items()
+             if re.search(rf"\b{word}\b", q) and " ".join(terms.split()[:2]) not in q]
+    return question + (" (" + "; ".join(dict.fromkeys(extra)) + ")" if extra else "")
+
+
 def detect_companies(question):
     """Return the tickers of companies named in the question, e.g. ["NVDA"]."""
     return sorted({ALIASES[w] for w in tokenize(question) if w in ALIASES})
@@ -113,6 +132,8 @@ class Retriever:
     def search(self, question, k=5, method="hybrid_rerank", n_candidates=40):
         """Return the chunk_ids of the k most relevant chunks (k per company if several are named)."""
         tickers = detect_companies(question) if method != "vector" else []
+        if method == "hybrid_rerank":
+            question = expand_query(question)
         groups = tickers or [None]
 
         if method in ("vector", "vector_filter"):
