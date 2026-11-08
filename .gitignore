@@ -1,12 +1,15 @@
 # Secrets
 .env
+.streamlit/secrets.toml
 
 # Generated data (recreated by the notebooks)
-data/raw/
+data/raw/*
+!data/raw/filings.json
 data/text/
 chroma_db/
 
 # Python / Jupyter / OS / IDE
+.venv/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store

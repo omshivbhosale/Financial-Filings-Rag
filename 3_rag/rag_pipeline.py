@@ -15,6 +15,7 @@ from pathlib import Path
 import pandas as pd
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
+from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -66,15 +67,28 @@ def detect_companies(question):
     return sorted({ALIASES[w] for w in tokenize(question) if w in ALIASES})
 
 
+def build_index(embeddings, chunks):
+    """Create the Chroma index from chunks.csv, the same way as 2_embedding/embedding.ipynb.
+    Used when the index folder is missing, e.g. on a fresh server (chroma_db/ is not in the repo)."""
+    documents = [Document(page_content=row.text,
+                          metadata={"ticker": row.ticker, "section": row.section, "chunk_id": row.chunk_id})
+                 for row in chunks.itertuples()]
+    return Chroma.from_documents(documents, embeddings, ids=chunks["chunk_id"].tolist(),
+                                 persist_directory=str(CHROMA_DIR), collection_name=COLLECTION)
+
+
 class Retriever:
     """Holds everything needed for search: the Chroma index, keyword indexes and the reranker."""
 
     def __init__(self):
         # Both models are small, so they run on the CPU; this avoids running out of GPU memory on Macs
         embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL, model_kwargs={"device": "cpu"})
-        self.vector_db = Chroma(persist_directory=str(CHROMA_DIR), collection_name=COLLECTION,
-                                embedding_function=embeddings)
         self.chunks = pd.read_csv(CHUNKS_FILE).set_index("chunk_id", drop=False)
+        if CHROMA_DIR.exists():
+            self.vector_db = Chroma(persist_directory=str(CHROMA_DIR), collection_name=COLLECTION,
+                                    embedding_function=embeddings)
+        else:
+            self.vector_db = build_index(embeddings, self.chunks.reset_index(drop=True))
 
         # One keyword index for all chunks, plus one per company
         self.keyword_index = {None: self._build_keyword_index(self.chunks)}
@@ -137,7 +151,7 @@ def generate_answer(llm, question, chunks):
     return reply.content.replace("【", "[").replace("】", "]")   # unify citation brackets
 
 
-def ask(retriever, llm, question, k=5, method="hybrid_rerank"):
+def ask(retriever, llm, question, k=10, method="hybrid_rerank"):
     """Full RAG: retrieve chunks, then generate an answer. Returns the answer and the chunks used."""
     chunks = retriever.get_chunks(retriever.search(question, k=k, method=method))
     return {"answer": generate_answer(llm, question, chunks), "sources": chunks}

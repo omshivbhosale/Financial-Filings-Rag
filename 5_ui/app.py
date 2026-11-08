@@ -4,14 +4,22 @@ Run from the project folder:
     streamlit run 5_ui/app.py
 """
 import json
+import os
 import sys
 from pathlib import Path
 
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# On Streamlit Cloud the Groq key comes from the app's secrets instead of a local .env file
+if "GROQ_API_KEY" not in os.environ:
+    try:
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        pass
 sys.path.insert(0, str(ROOT / "3_rag"))
-from rag_pipeline import CHROMA_DIR, COMPANIES, METHODS, Retriever, ask, load_llm  # noqa: E402
+from rag_pipeline import COMPANIES, METHODS, Retriever, ask, load_llm  # noqa: E402
 
 st.set_page_config(page_title="Financial Filings Assistant", page_icon="📊", layout="centered")
 
@@ -28,7 +36,8 @@ METHOD_LABELS = {
 }
 
 
-@st.cache_resource(show_spinner="Loading the search index and models…")
+@st.cache_resource(show_spinner="Loading the search index and models (the first start on a new server "
+                                "also builds the index, about 1–2 minutes)…")
 def load_components():
     """Load the retriever and the LLM once; Streamlit reuses them for every question."""
     return Retriever(), load_llm()
@@ -55,7 +64,7 @@ with st.sidebar:
 
     st.header("⚙️ Settings")
     method = st.selectbox("Search method", METHODS[::-1], format_func=METHOD_LABELS.get)
-    k = st.slider("Chunks sent to the AI", min_value=3, max_value=10, value=5)
+    k = st.slider("Chunks sent to the AI", min_value=3, max_value=10, value=10)
 
     st.header("💡 Try an example")
     for example in EXAMPLES:
@@ -70,9 +79,8 @@ st.title("📊 Financial Filings Assistant")
 st.caption("Ask questions about the latest annual reports (10-K) of Apple, Microsoft, NVIDIA, Tesla and Amazon. "
            "Answers come only from the reports, with citations.")
 
-if not CHROMA_DIR.exists():
-    st.error("Search index not found. Run `1_data_retrieval/data_retrieval.ipynb` and "
-             "`2_embedding/embedding.ipynb` first.")
+if not os.environ.get("GROQ_API_KEY"):
+    st.error("GROQ_API_KEY is not set. Add it to a `.env` file (local) or to the app's secrets (Streamlit Cloud).")
     st.stop()
 
 retriever, llm = load_components()

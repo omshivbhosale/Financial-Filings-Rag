@@ -1,0 +1,22 @@
+{
+  "AAPL": {
+    "filing_date": "2026-11-03",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+  },
+  "MSFT": {
+    "filing_date": "2026-07-29",
+    "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+  },
+  "NVDA": {
+    "filing_date": "2026-02-25",
+    "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+  },
+  "TSLA": {
+    "filing_date": "2026-01-29",
+    "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+  },
+  "AMZN": {
+    "filing_date": "2026-02-06",
+    "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+  }
+}
