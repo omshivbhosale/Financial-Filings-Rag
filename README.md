@@ -2,7 +2,7 @@
 
 A chatbot that answers questions about the latest annual reports (10-K filings) of **Apple, Microsoft, NVIDIA, Tesla and Amazon**, citing the exact part of the report each answer comes from, and an evaluation that measures how often it is right.
 
-**🔗 Live demo:** _coming soon_
+**🔗 Live demo:** [financial-filings-omshivbhosale.streamlit.app](https://financial-filings-omshivbhosale.streamlit.app/)
 
 | | Baseline (embedding search, 5 chunks) | Hybrid search + reranker, 5 chunks | **Hybrid search + reranker, 10 chunks** |
 |---|---|---|---|
